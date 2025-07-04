@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Humble Empire Consults</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header>
+    <h1>HUMBLE EMPIRE CONSULTS</h1>
+    <p>Your trusted link between digital assets, artisan services, and commercial growth.</p>
+  </header>
+
+  <nav>
+    <a href="#bio">Bio</a>
+    <a href="#services">Services</a>
+    <a href="blog.html">Blog</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div style="text-align:center; margin-top:20px;">
+    <label>🌙 <input id="darkToggle" type="checkbox"/> Dark mode</label>
+  </div>
+
+  <section id="bio">
+    <h2>About Us</h2>
+    <div class="bio">
+      <p><strong>Humble Empire Consults</strong> is a professional consulting firm dedicated to bridging the gap between digital and physical markets. We specialize in helping individuals and businesses gain access to digital assets, commercial sales support, and strategic connections between artisans and prospective clients.</p>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <ul>
+      <li>Digital Asset Commercial Sales</li>
+      <li>Connecting Artisans with Clients</li>
+      <li>Physical and Digital Service Promotion</li>
+      <li>Business Consultations and Strategy</li>
+      <li>Online Presence Enhancement for Local Professionals</li>
+    </ul>
+  </section>
+
+  <section id="blog-preview">
+    <h2>Latest Posts</h2>
+    <ul id="posts-list"></ul>
+    <p><a href="blog.html">See all posts →</a></p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:humblempire@gmail.com">humblempire@gmail.com</a></p>
+    <p>WhatsApp: <a href="https://wa.me/2347061124884" target="_blank">+234 706 112 4884</a></p>
+  </section>
+
+  <footer>&copy; 2025 Humble Empire Consults. All rights reserved.</footer>
+
+  <script>
+    const toggle = document.getElementById('darkToggle');
+    const current = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', current);
+    if (current === 'dark') toggle.checked = true;
+    toggle.addEventListener('change', () => {
+      const theme = toggle.checked ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    });
+
+    fetch('posts/index.json')
+      .then(res => res.json())
+      .then(posts => {
+        const ul = document.getElementById('posts-list');
+        posts.slice(0,3).forEach(p => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="posts/${p.filename.replace('.md','.html')}">${p.title} – <small>${p.date}</small></a>`;
+          ul.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

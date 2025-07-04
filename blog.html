@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog – Humble Empire Consults</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Humble Empire Blog</h1>
+  </header>
+  <ul id="all-posts" style="max-width:800px;margin:40px auto;"></ul>
+  <script>
+    fetch('posts/index.json')
+      .then(res => res.json())
+      .then(posts => {
+        const ul = document.getElementById('all-posts');
+        posts.forEach(p => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="posts/${p.filename.replace('.md','.html')}">${p.title}</a> – <small>${p.date}</small>`;
+          ul.appendChild(li);
+        });
+      });
+  </script>
+</body>
+</html>

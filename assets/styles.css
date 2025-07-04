@@ -1,0 +1,21 @@
+:root {
+  --bg: #f4f4f4;
+  --text: #333;
+  --header-bg: #222;
+  --nav-bg: #444;
+  --nav-hover: #666;
+}
+[data-theme="dark"] {
+  --bg: #1e1e1e;
+  --text: #ddd;
+  --header-bg: #111;
+  --nav-bg: #333;
+  --nav-hover: #555;
+}
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color .3s, color .3s;
+}
